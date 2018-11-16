@@ -8,7 +8,7 @@ Ensure that the environment you are using has:
     - matplotlib
     - tf-hub
     - tensorflow
-
+s
 Right now the script saves an image with bounded boxes to `/tmp/results/`
 
 These are some of the results
