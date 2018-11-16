@@ -1,14 +1,13 @@
 # TensorFlow Playground
 
-Ensure that the environment you are using has:
-- venv with
-    - python3
-    - pip3
-    - numpy
-    - matplotlib
-    - tf-hub
-    - tensorflow
-s
+Ensure that the environment you are using has venv with:
+
+- **python3**
+- **numpy**
+- **matplotlib**
+- **tf-hub**
+- **tensorflow**
+
 Right now the script saves an image with bounded boxes to `/tmp/results/`
 
 These are some of the results
