@@ -162,6 +162,6 @@ image_with_boxes = draw_boxes(
     result_out["detection_class_entities"], result_out["detection_scores"])
 
 im = Image.fromarray(image_with_boxes)
-im.save("/tmp/results/bounded_objects.jpg")
+im.save("/home/chris/tf/experiments/results/bounded_objects.jpg")
 
 display_image(image_with_boxes)
