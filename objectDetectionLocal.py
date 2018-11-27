@@ -129,7 +129,7 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
 image_url = "https://doyouevendata.github.io/images/DWS2017/dws2017_1.jpg"
 
 #downloaded_image_path = download_and_resize_image(image_url, 1280, 856, True)
-downloaded_image_path = '/home/chris/tf/data/mustang.jpg'
+downloaded_image_path = /home/chris/tf/data/mustang.jpg
 
 module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" #@param ["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
 
@@ -146,7 +146,7 @@ with tf.Graph().as_default():
   init_ops = [tf.global_variables_initializer(), tf.tables_initializer()]
 
   session = tf.Session()
-  session.run(init_ops)
+  session.run(init_ops)s
 
   # Load the downloaded and resized image and feed into the graph.
   with tf.gfile.Open(downloaded_image_path, "rb") as binfile:
