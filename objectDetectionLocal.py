@@ -1,5 +1,8 @@
 #@title Imports and function definitions
 
+# For local usage of this script
+import os
+
 # For running inference on the TF-Hub module.
 import tensorflow as tf
 import tensorflow_hub as hub
@@ -121,17 +124,12 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
 
   return image
 
-#image_url = "https://farm1.staticflickr.com/4032/4653948754_c0d768086b_o.jpg"  #@param
-#image_url = "https://www.fieldandstream.com/sites/fieldandstream.com/files/styles/655_1x_/public/images/2016/12/snowsquirrel.jpg?itok=60RS0l4i&fc=50,50"
-#image_url = "https://img.apmcdn.org/7e21783e90b9a2932b7430675e39e56793729b46/normal/f2e1fc-20180916-squirrels01.jpg"
-#image_url = "https://scontent.fsjc1-3.fna.fbcdn.net/v/t31.0-8/11705465_970503759647606_2671800762967607768_o.jpg?_nc_cat=111&_nc_ht=scontent.fsjc1-3.fna&oh=ee7ee531ebe252d7dfac7d41402da550&oe=5C791CA1"
 
-image_url = "https://doyouevendata.github.io/images/DWS2017/dws2017_1.jpg"
-
-#downloaded_image_path = download_and_resize_image(image_url, 1280, 856, True)
-downloaded_image_path = /home/chris/tf/data/mustang.jpg
+downloaded_image_path = "/home/chris/Pictures/cam_outdoor_112618/images/1543262947122.jpeg"
 
 module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" #@param ["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
+
+
 
 with tf.Graph().as_default():
   detector = hub.Module(module_handle)
@@ -146,8 +144,36 @@ with tf.Graph().as_default():
   init_ops = [tf.global_variables_initializer(), tf.tables_initializer()]
 
   session = tf.Session()
-  session.run(init_ops)s
+  session.run(init_ops)
 
+
+# Modified here
+
+localDir = '/home/chris/Pictures/cam_outdoor_112618/images/'
+
+i = 0
+
+for filename in os.listdir(localDir):
+  print(filename)
+  if filename.endswith(".jpeg"):
+    with tf.gfile.Open(localDir+filename, "rb") as binfile:
+      image_string = binfile.read()
+
+      result_out, image_out = session.run(
+          [result, decoded_image],
+          feed_dict={image_string_placeholder: image_string})
+      print("Found %d objects." % len(result_out["detection_scores"]))
+
+    image_with_boxes = draw_boxes(
+      np.array(image_out), result_out["detection_boxes"],
+      result_out["detection_class_entities"], result_out["detection_scores"])
+
+    im = Image.fromarray(image_with_boxes)
+    im.save('/home/chris/tf/experiments/results/'+ filename +'.jpg')
+    i = i+1
+
+
+"""
   # Load the downloaded and resized image and feed into the graph.
   with tf.gfile.Open(downloaded_image_path, "rb") as binfile:
     image_string = binfile.read()
@@ -164,4 +190,65 @@ image_with_boxes = draw_boxes(
 im = Image.fromarray(image_with_boxes)
 im.save("/home/chris/tf/experiments/results/bounded_objects.jpg")
 
-display_image(image_with_boxes)
+"""
+
+
+
+
+
+"""
+
+localDir = '/home/chris/Pictures/testimages'
+
+i = 0
+
+for filename in os.listdir(localDir):
+  if filename.endswith(".jpg"):
+    with tf.gfile.Open(filename, "rb") as binfile:
+      image_string = binfile.read()
+    
+    inference_start_time = time.clock()
+    result_out, image_out = session.run(
+        [result, decoded_image],
+        feed_dict={image_string_placeholder: image_string})
+
+    print("Found %d objects." % len(result_out["detection_scores"]))
+    print("Inference took %.2f seconds." % (time.clock()-inference_start_time))
+    
+    image_with_boxes = draw_boxes(
+      np.array(image_out), result_out["detection_boxes"],
+      result_out["detection_class_entities"], result_out["detection_scores"])
+    im = Image.fromarray(image_with_boxes)
+    im.save('/home/chris/tf/experiments/results/bounded_objects' + str(i) + '.jpg')
+    i = i+1
+
+"""
+"""
+
+image_urls = ["https://farm7.staticflickr.com/8092/8592917784_4759d3088b_o.jpg",
+              "https://farm6.staticflickr.com/2598/4138342721_06f6e177f3_o.jpg",
+              "https://c4.staticflickr.com/9/8322/8053836633_6dc507f090_o.jpg"]
+i = 0
+for image_url in image_urls:
+  image_path = download_and_resize_image(image_url, 640, 480)
+  with tf.gfile.Open(image_path, "rb") as binfile:
+    image_string = binfile.read()
+
+  inference_start_time = time.clock()
+  result_out, image_out = session.run(
+      [result, decoded_image],
+      feed_dict={image_string_placeholder: image_string})
+  print("Found %d objects." % len(result_out["detection_scores"]))
+  print("Inference took %.2f seconds." % (time.clock()-inference_start_time))
+
+  image_with_boxes = draw_boxes(
+    np.array(image_out), result_out["detection_boxes"],
+    result_out["detection_class_entities"], result_out["detection_scores"])
+  im = Image.fromarray(image_with_boxes)
+  im.save('/home/chris/tf/experiments/results/bounded_objects' + str(i) + '.jpg')
+  i = i+1
+
+  
+  display_image(image_with_boxes)
+
+"""
