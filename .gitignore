@@ -1,1 +1,2 @@
-experiments/results/*.jpg
+*.jpg
+!assets/images*.jpg
