@@ -24,6 +24,10 @@ This one is tricky but it classified a squirrel as a rabbit and as a squirrel:
 
 ![rabbit](assets/images/rabbit.jpg)
 
+This cat has a person on his hind leg
+
+![cat](assets/cat.jpg)
+
 ## Get started
 
 Have dependencies installed preferably in a virtual environment
