@@ -124,8 +124,8 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
 
   return image
 
-
-downloaded_image_path = "/home/chris/Pictures/cam_outdoor_112618/images/1543262947122.jpeg"
+#downloaded_image_path = download_and_resize_image(image_url, 1280, 856, True)
+downloaded_image_path = /home/chris/tf/data/mustang.jpg
 
 module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" #@param ["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
 
