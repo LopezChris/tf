@@ -1,13 +1,5 @@
 # TensorFlow Playground
 
-Ensure that the environment you are using has venv with:
-
-- **python3**
-- **numpy**
-- **matplotlib**
-- **tf-hub**
-- **tensorflow**
-
 Right now the script saves an image with bounded boxes to `/tmp/results/`
 
 These are some of the results
@@ -29,6 +21,14 @@ This cat has a person on his hind leg
 ![cat](assets/images/cat.jpg)
 
 ## Get started
+
+Ensure that the environment you are using has venv with:
+
+- **python3**
+- **numpy**
+- **matplotlib**
+- **tf-hub**
+- **tensorflow**
 
 Have dependencies installed preferably in a virtual environment
 
