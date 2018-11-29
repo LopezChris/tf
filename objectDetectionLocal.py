@@ -27,27 +27,6 @@ import time
 # Check available GPU devices.
 print("The following GPU devices are available: %s" % tf.test.gpu_device_name())
 
-def display_image(image):
-  fig = plt.figure(figsize=(20, 15))
-  plt.grid(False)
-  plt.imshow(image)
-
-
-def download_and_resize_image(url, new_width=256, new_height=256,
-                              display=False):
-  _, filename = tempfile.mkstemp(suffix=".jpg")
-  response = urlopen(url)
-  image_data = response.read()
-  image_data = BytesIO(image_data)
-  pil_image = Image.open(image_data)
-  pil_image = ImageOps.fit(pil_image, (new_width, new_height), Image.ANTIALIAS)
-  pil_image_rgb = pil_image.convert("RGB")
-  pil_image_rgb.save(filename, format="JPEG", quality=90)
-  print("Image downloaded to %s." % filename)
-  if display:
-    display_image(pil_image)
-  return filename
-
 
 def draw_bounding_box_on_image(image,
                                ymin,
@@ -125,130 +104,56 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
   return image
 
 #downloaded_image_path = download_and_resize_image(image_url, 1280, 856, True)
-downloaded_image_path = /home/chris/tf/data/mustang.jpg
-
-module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" #@param ["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
 
 
 
-with tf.Graph().as_default():
-  detector = hub.Module(module_handle)
-  image_string_placeholder = tf.placeholder(tf.string)
-  decoded_image = tf.image.decode_jpeg(image_string_placeholder)
-  # Module accepts as input tensors of shape [1, height, width, 3], i.e. batch
-  # of size 1 and type tf.float32.
-  decoded_image_float = tf.image.convert_image_dtype(
-      image=decoded_image, dtype=tf.float32)
-  module_input = tf.expand_dims(decoded_image_float, 0)
-  result = detector(module_input, as_dict=True)
-  init_ops = [tf.global_variables_initializer(), tf.tables_initializer()]
-
-  session = tf.Session()
-  session.run(init_ops)
+def run_inference_locally(localDir, im_type):
+  #["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
+  module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" 
 
 
-# Modified here
+  with tf.Graph().as_default():
+    detector = hub.Module(module_handle)
+    image_string_placeholder = tf.placeholder(tf.string)
+    decoded_image = tf.image.decode_jpeg(image_string_placeholder)
+    # Module accepts as input tensors of shape [1, height, width, 3], i.e. batch
+    # of size 1 and type tf.float32.
+    decoded_image_float = tf.image.convert_image_dtype(
+        image=decoded_image, dtype=tf.float32)
+    module_input = tf.expand_dims(decoded_image_float, 0)
+    result = detector(module_input, as_dict=True)
+    init_ops = [tf.global_variables_initializer(), tf.tables_initializer()]
 
-localDir = '/home/chris/Pictures/cam_outdoor_112618/images/'
+    session = tf.Session()
+    session.run(init_ops)
 
-i = 0
+  # For files in the folder given, iter
+  i = 0
 
-for filename in os.listdir(localDir):
-  print(filename)
-  if filename.endswith(".jpeg"):
-    with tf.gfile.Open(localDir+filename, "rb") as binfile:
-      image_string = binfile.read()
+  for filename in os.listdir(localDir):
+    print(filename)
+    if filename.endswith(im_type):
+      with tf.gfile.Open(localDir+filename, "rb") as binfile:
+        image_string = binfile.read()
 
-      result_out, image_out = session.run(
-          [result, decoded_image],
-          feed_dict={image_string_placeholder: image_string})
-      print("Found %d objects." % len(result_out["detection_scores"]))
+        result_out, image_out = session.run(
+            [result, decoded_image],
+            feed_dict={image_string_placeholder: image_string})
+        print("Found %d objects." % len(result_out["detection_scores"]))
 
-    image_with_boxes = draw_boxes(
-      np.array(image_out), result_out["detection_boxes"],
-      result_out["detection_class_entities"], result_out["detection_scores"])
+      image_with_boxes = draw_boxes(
+        np.array(image_out), result_out["detection_boxes"],
+        result_out["detection_class_entities"], result_out["detection_scores"])
 
-    im = Image.fromarray(image_with_boxes)
-    im.save('/home/chris/tf/experiments/results/'+ filename +'.jpg')
-    i = i+1
+      # Needed as these images are converted into numpy arrays
+      im = Image.fromarray(image_with_boxes)
+      # Named files with original name as they are taken out of order
+      # TODO: Remove file extension from name when storing
+      im.save('/home/chris/tf/experiments/results/'+ filename +'.jpg')
+      i += 1
 
-
-"""
-  # Load the downloaded and resized image and feed into the graph.
-  with tf.gfile.Open(downloaded_image_path, "rb") as binfile:
-    image_string = binfile.read()
-
-  result_out, image_out = session.run(
-      [result, decoded_image],
-      feed_dict={image_string_placeholder: image_string})
-  print("Found %d objects." % len(result_out["detection_scores"]))
-
-image_with_boxes = draw_boxes(
-    np.array(image_out), result_out["detection_boxes"],
-    result_out["detection_class_entities"], result_out["detection_scores"])
-
-im = Image.fromarray(image_with_boxes)
-im.save("/home/chris/tf/experiments/results/bounded_objects.jpg")
-
-"""
-
-
-
-
-
-"""
-
-localDir = '/home/chris/Pictures/testimages'
-
-i = 0
-
-for filename in os.listdir(localDir):
-  if filename.endswith(".jpg"):
-    with tf.gfile.Open(filename, "rb") as binfile:
-      image_string = binfile.read()
-    
-    inference_start_time = time.clock()
-    result_out, image_out = session.run(
-        [result, decoded_image],
-        feed_dict={image_string_placeholder: image_string})
-
-    print("Found %d objects." % len(result_out["detection_scores"]))
-    print("Inference took %.2f seconds." % (time.clock()-inference_start_time))
-    
-    image_with_boxes = draw_boxes(
-      np.array(image_out), result_out["detection_boxes"],
-      result_out["detection_class_entities"], result_out["detection_scores"])
-    im = Image.fromarray(image_with_boxes)
-    im.save('/home/chris/tf/experiments/results/bounded_objects' + str(i) + '.jpg')
-    i = i+1
-
-"""
-"""
-
-image_urls = ["https://farm7.staticflickr.com/8092/8592917784_4759d3088b_o.jpg",
-              "https://farm6.staticflickr.com/2598/4138342721_06f6e177f3_o.jpg",
-              "https://c4.staticflickr.com/9/8322/8053836633_6dc507f090_o.jpg"]
-i = 0
-for image_url in image_urls:
-  image_path = download_and_resize_image(image_url, 640, 480)
-  with tf.gfile.Open(image_path, "rb") as binfile:
-    image_string = binfile.read()
-
-  inference_start_time = time.clock()
-  result_out, image_out = session.run(
-      [result, decoded_image],
-      feed_dict={image_string_placeholder: image_string})
-  print("Found %d objects." % len(result_out["detection_scores"]))
-  print("Inference took %.2f seconds." % (time.clock()-inference_start_time))
-
-  image_with_boxes = draw_boxes(
-    np.array(image_out), result_out["detection_boxes"],
-    result_out["detection_class_entities"], result_out["detection_scores"])
-  im = Image.fromarray(image_with_boxes)
-  im.save('/home/chris/tf/experiments/results/bounded_objects' + str(i) + '.jpg')
-  i = i+1
-
-  
-  display_image(image_with_boxes)
-
-"""
+if __name__ == '__main__':
+  # Change image type for application (i.e. '.jpg', '.jpeg', '.JPEG')
+  im_type = '.jpg'
+  localDir = '/home/chris/Pictures/testimages/'
+  run_inference_locally(localDir, im_type)
