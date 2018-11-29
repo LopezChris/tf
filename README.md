@@ -26,7 +26,7 @@ This one is tricky but it classified a squirrel as a rabbit and as a squirrel:
 
 This cat has a person on his hind leg
 
-![cat](assets/cat.jpg)
+![cat](assets/images/cat.jpg)
 
 ## Get started
 
