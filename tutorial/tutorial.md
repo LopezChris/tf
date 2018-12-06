@@ -79,6 +79,12 @@ source ~/venvtf/bin/activate
 Now for the good stuff
 
 ~~~bash
+python3 -m pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.12.0-py3-none-any.whl
+~~~
+
+Other Dependencies
+
+~~~bash
 brew install python3
 pip3 install numpy
 pip3 install tensorflow-hub
