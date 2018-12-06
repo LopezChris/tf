@@ -1,10 +1,13 @@
-# Image Generation
+# Image Generation Using Progressive Generally Adversarial Networks
 
-Image generator based on tensorflow reimplementation of Progressive GANs[1].
+Image generator based on tensorflow reimplementation of Progressive GANs[1](https://tfhub.dev/google/progan-128/1).
 
 ![results](results/animation.gif)
 
-Progressive GAN trained on CelebA for 128x128 images, so if we want a different dataset we must retrain, instructions or specifications not provided here.
+## Training
+The original model has been trained on a GPU for 636,801 steps with batch size 16. Progressive GAN trained on CelebA for 128x128 images, so if we want a different dataset we must retrain, instructions or specifications not provided here.
+
+[Publishing](https://arxiv.org/abs/1710.10196)
 
 This one gives a beatiful examples of Stochastic Gradient Descent, below is the output of the program's loss as a fucntion of time.
 
