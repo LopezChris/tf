@@ -1,5 +1,7 @@
 # TensorFlow Playground
 
+![experiments/results/elephant.jpg](experiments/results/elephant.jpg)
+
 ## Object Detection With RC Car
 
 ![experiments/results/objectid.gif](experiments/results/objectid.gif)
