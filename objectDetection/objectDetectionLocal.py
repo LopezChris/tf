@@ -103,11 +103,11 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
 
   return image
 
-#downloaded_image_path = download_and_resize_image(image_url, 1280, 856, True)
 
+# Method to run the model in a local directory and store 
+# output images locally.
 
-
-def run_inference_locally(localDir, im_type):
+def run_inference_locally(localDir, im_type, saveDir):
   #["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
   module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" 
 
@@ -127,8 +127,7 @@ def run_inference_locally(localDir, im_type):
     session = tf.Session()
     session.run(init_ops)
 
-  # For files in the folder given, iter
-  i = 0
+  # For files in the folder given, iterate
 
   for filename in os.listdir(localDir):
     print(filename)
@@ -147,13 +146,13 @@ def run_inference_locally(localDir, im_type):
 
       # Needed as these images are converted into numpy arrays
       im = Image.fromarray(image_with_boxes)
-      # Named files with original name as they are taken out of order
-      # TODO: Remove file extension from name when storing
-      im.save('/home/chris/tf/experiments/results/'+ filename +'.jpg')
-      i += 1
+      im.save(saveDir + filename)
 
 if __name__ == '__main__':
   # Change image type for application (i.e. '.jpg', '.jpeg', '.JPEG')
   im_type = '.jpg'
-  localDir = '/home/chris/Pictures/testimages/'
-  run_inference_locally(localDir, im_type)
+  # List where the images are stored
+  localDir = '/home/chris/Desktop/Photos/'
+  # After running inference this is where the images will be stored
+  saveDir = '/home/chris/Desktop/new_Photos/'
+  run_inference_locally(localDir, im_type, saveDir)
