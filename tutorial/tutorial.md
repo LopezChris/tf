@@ -1,23 +1,23 @@
 ---
-title: New tutorial name
-author: You, because you are writing it!
-tutorial-id: Ask for tutorial ID assignment policy.
-experience: Beginer, Intermediate, Advanced
-persona: Example (Data Scientist & Analyst)
+title: Deep Learning in 5 Minutes
+author: sandbox-team
+tutorial-id: XXX
+experience: Beginner
+persona: Data Scientist
 source: Hortonworks
 use case: Example (Data Discovery)
-technology: Be as detailed as you can while still being accurate, for example (Apache Spark, Apache Ozone, Apache Hive with LLAP)
-release: Latest updated version for example (hdp-2.6.5)
+technology: XXX
+release: hdp-3.0.1
 environment: Sandbox
-product: HDP, HDF, CDA (Ask a team member before using CDA here, website might not be ready yet)
-series: This important as it will determine where the tutorial is posted example (HDP > Develop with Hadoop > Apache Spark)
+product: HDP
+series: XX > XX
 ---
 
 # TODO:
 
 Update metadata
 
-# Object Detection
+# Deep Learning In 5 Minutes
 
 ## Introduction
 
