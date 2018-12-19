@@ -114,7 +114,6 @@ def run_inference_locally(localDir, im_type, saveDir):
   #["https://tfhub.dev/google/openimages_v4/ssd/mobilenet_v2/1", "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"]
   module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1" 
 
-
   with tf.Graph().as_default():
     detector = hub.Module(module_handle)
     image_string_placeholder = tf.placeholder(tf.string)
@@ -150,6 +149,7 @@ def run_inference_locally(localDir, im_type, saveDir):
       # Needed as these images are converted into numpy arrays
       im = Image.fromarray(image_with_boxes)
       im.save(saveDir + filename)
+
 
 def main(argv):
   inputfile = ''
