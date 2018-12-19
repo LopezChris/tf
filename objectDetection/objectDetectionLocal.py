@@ -1,5 +1,8 @@
 #@title Imports and function definitions
 
+# System interface
+import sys, getopt
+
 # For local usage of this script
 import os
 
@@ -35,7 +38,7 @@ def draw_bounding_box_on_image(image,
                                xmax,
                                color,
                                font,
-                               thickness=4,
+                               thickness=3,
                                display_str_list=()):
   """Adds a bounding box to an image."""
   draw = ImageDraw.Draw(image)
@@ -148,11 +151,26 @@ def run_inference_locally(localDir, im_type, saveDir):
       im = Image.fromarray(image_with_boxes)
       im.save(saveDir + filename)
 
-if __name__ == '__main__':
-  # Change image type for application (i.e. '.jpg', '.jpeg', '.JPEG')
-  im_type = '.jpg'
-  # List where the images are stored
-  localDir = '/home/chris/Desktop/Photos/'
-  # After running inference this is where the images will be stored
-  saveDir = '/home/chris/Desktop/new_Photos/'
+def main(argv):
+  inputfile = ''
+  output_file = ''
+  try:
+    opts, args = getopt.getopt(argv, "hi:o:t",{"ifile=","ofile=","type="})
+  except getopt.GetoptError:
+    print('objectDetctionLocal.py -i <inputfile> -o <outputfile> -t <image_type>')
+    sys.exit(2)
+  for opt, arg in opts:
+    if opt == '-help':
+      print('<python >= 3.6> objectDetctionLocal.py -i <inputfile> -o <outputfile> -t <image_type>')
+      sys.exit(2)
+    elif opt in ("-i", "--ifile"):
+      localDir = arg
+    elif opt in ("-o", "--ofile"):
+      saveDir = arg
+    elif opt in ("-t", "--type"):
+      im_type = arg
+    
   run_inference_locally(localDir, im_type, saveDir)
+
+if __name__ == '__main__':
+  main(sys.argv[1:])
