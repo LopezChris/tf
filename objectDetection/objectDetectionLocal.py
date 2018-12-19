@@ -27,9 +27,6 @@ from PIL import ImageOps
 # For measuring the inference time.
 import time
 
-# Check available GPU devices.
-print("The following GPU devices are available: %s" % tf.test.gpu_device_name())
-
 
 def draw_bounding_box_on_image(image,
                                ymin,
@@ -160,7 +157,7 @@ def main(argv):
     print('objectDetctionLocal.py -i <inputfile> -o <outputfile> -t <image_type>')
     sys.exit(2)
   for opt, arg in opts:
-    if opt == '-help':
+    if opt == '--help':
       print('<python >= 3.6> objectDetctionLocal.py -i <inputfile> -o <outputfile> -t <image_type>')
       sys.exit(2)
     elif opt in ("-i", "--ifile"):
@@ -169,6 +166,7 @@ def main(argv):
       saveDir = arg
     elif opt in ("-t", "--type"):
       im_type = arg
+
     
   run_inference_locally(localDir, im_type, saveDir)
 
