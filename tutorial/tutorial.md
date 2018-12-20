@@ -19,11 +19,17 @@ series: XX > XX
 
 ![buggy](assets/buggy.jpg)
 
-During the 2018 [DataWorks summit](Link) Hortonworks showcased an autonomous car which was trained to follow markers along a race track. The point of the exercise is to showcase the power of a TensorFlow container managed by YARN along with GPU isolation for fast deployment of Deep Learning models. 
+During the 2018 [DataWorks summit](Link) Hortonworks showcased an autonomous car which was trained to follow markers along a race track only by using images as a reference.
 
-In this tutorial We will briefly explore how Deep Learning plays a role in autonomous vehicles by using a pre-trained model to identify objects in a given image. We will employ [FasterRCNN+InceptionResNetV2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) network trained on [Open Images V4](https://storage.googleapis.com/openimages/web/index.html) imported to the environment using TensorFlow hub. On the clip below we can observe the perspective of the Hortonworks car.
+ The point of the exercise is to showcase the power of a TensorFlow container managed by YARN along with GPU isolation for fast deployment of Deep Learning models.
+
+On the clip below we can observe the perspective of the Hortonworks car.
 
 ![car-vision](assets/car-vision.gif)
+
+In this tutorial we will briefly explore Deep Learning plays a role in autonomous vehicles by using a pre-trained model to identify objects in a given image. We will employ [FasterRCNN+InceptionResNetV2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) network trained on [Open Images V4](https://storage.googleapis.com/openimages/web/index.html) imported to the environment using TensorFlow Hub.
+
+Originally the [InceptionResNetV2](https://www.tensorflow.org/versions/r1.6/api_docs/python/tf/keras/applications/InceptionResNetV2) feature extractor was trained on [ImageNet](http://www.image-net.org/) and combined with [FasterRCNN](https://arxiv.org/abs/1506.01497) on [OpenImages V4 dataset](https://storage.googleapis.com/openimages/web/index.html)
 
 ## Prerequisites
 
@@ -47,13 +53,13 @@ In AI terms _Inference_ refers to the ability of a Neural Network to classify ob
 
 ![elephant](assets/elephant.jpg)
 
-To the human brain this is an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal it is we are observing. By the same token the inception_resnet_v2 has been trained on 600 categories which enable it to recognize objects such as vehicles, humans, and even footwear. 
+To the human brain this is an image of an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal we are observing. By the same token the inception_resnet_v2 has been trained on 600 categories which enable it to recognize objects such as vehicles, humans, and even footwear.
 
 We will run CNN inferences to the images below and explore how difference lighting and weather conditions can affect the results of the inference.
 
 ![collage](assets/collage.jpg)
 
-note that this python script is a modified version of [Google Colab Object Detection.](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb)
+> NOTE: The python script used is a modified version of [Google Colab Object Detection.](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb)
 
 ## Environment Setup
 
@@ -71,7 +77,7 @@ sudo pip3 install -U virtualenv
 ~~~
 
 ~~~bash
-virtualenv --system-site-packages -p python3 ./venv
+virtualenv --system-site-packages -p python3 ./venv # From home direcotry
 source ./venv/bin/activate
 
 pip3 install numpy
@@ -98,24 +104,26 @@ cd object-detection
 
 ## Run The Object Detection Model
 
-To execute the python script that will execute the inference run:
+To execute the python script that will execute the inference on the sample images first ensure that your virtual environment is active:
 
 ~~~bash
 source ~/venv/bin/activate
 cd ~/Downloads/objectDetection/
 ~~~
 
+next execute the python script on the folder you've just downloaded
+
 ~~~bash
-python3 objectDetectionLocal.py --idir ./images/ --odir ./output/ --type jpg
+python3 objectDetectionLocal.py --idir ~/Downloads/object-detection/images/ --odir ~/Downloads/object-detection/output/ --type jpg
 ~~~
 
 ## Results
 
-The first image is of a man on the sidewalk of a busy street, as we can see the lighting condition is good and the focus is sharp on the subject of the picture, these conditions allow the model to infer on the objects in the picture with relative precision.
+The first image is of a man on the sidewalk of a busy street, as we can see the lighting condition is good and the focus is sharp on the subject of the picture, these conditions allow the model to infer on the objects in the picture with relatively high precision.
 
 ![man-waling-output](assets/man-waling-output.jpg)
 
-This
+The next image depicts a typical 
 
 ![good-lighting-traffic-output](assets/good-lighting-traffic-output.jpg)
 
@@ -123,17 +131,17 @@ Is
 
 ![good-lighting-traffic-output](assets/good-lighting-traffic2-output.jpg)
 
-Sparta
+The next image represents non-ideal conditions where the objects in the picture are 
 
 ![bad-condition-output](assets/bad-condition-output.jpg)
 
-HelloWorld
+The last image in the set is of 
 
 ![bad-condition-output](assets/bad-condition2-output.jpg)
 
 ## Summary
 
-Congratulations, now you know how to 
+Congratulations, now you know how to run inference
 
 On the [CNN Transfer Learning Tutorial](James-tutorial)
 
