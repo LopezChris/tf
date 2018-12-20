@@ -1,5 +1,5 @@
 ---
-title: Deep Learning in 5 Minutes
+title: Object Detection in 5 Minutes
 author: sandbox-team
 tutorial-id: XXX
 experience: Beginner
@@ -25,8 +25,6 @@ In this tutorial We will briefly explore how Deep Learning plays a role in auton
 
 ![car-vision](assets/car-vision.gif)
 
-
-
 ## Prerequisites
 
 - Downloaded and deployed the [Hortonworks Data Platform (HDP)](https://hortonworks.com/downloads/#sandbox) Sandbox
@@ -35,8 +33,8 @@ In this tutorial We will briefly explore how Deep Learning plays a role in auton
 ## Outline
 
 - [Concepts](#concepts)
-- [Environment Setup](#section-title-1)
-- [Section Title 2](#section-title-2)
+- [Environment Setup](#environment-setup)
+- [Import the Data Set](#import-the-data-set)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 - [Appendix A: Troubleshoot](#appendix-a-troubleshoot)
@@ -59,9 +57,13 @@ note that this python script is a modified version of [Google Colab Object Detec
 
 ## Environment Setup
 
-- **python3**
+You will need the following libraries installed:
 
-Once you have Python3.6 installed ensure you also have these dependencies:
+- **python3**
+- **numpy**
+- **matplotlib**
+- **tf-hub**
+- **tensorflow**
 
 ~~~bash
 sudo apt install python3-dev python3-pip
@@ -74,11 +76,11 @@ source ./venv/bin/activate
 
 pip3 install numpy
 pip3 install matplotlib
-pip3 install tf-hub
 pip3 install tensorflow
+pip3 install tf-hub
 ~~~
 
-### Import The Data set
+### Import The Data Set
 
 Now that our environment has all the dependencies required we can bring in images to be processed.
 
@@ -107,9 +109,21 @@ cd ~/Downloads/objectDetection/
 python3 objectDetectionLocal.py --idir ./images/ --odir ./output/ --type jpg
 ~~~
 
+## Results
 
+![man-waling-output](assets/man-waling-output.jpg)
+
+![good-lighting-traffic-output](assets/good-lighting-traffic-output.jpg)
+
+![good-lighting-traffic-output](assets/good-lighting-traffic2-output.jpg)
+
+![bad-condition-output](assets/bad-condition-output.jpg)
+
+![bad-condition-output](assets/bad-condition2-output.jpg)
 
 ## Summary
+
+Congratulations, now you know how to 
 
 On the [CNN Transfer Learning Tutorial](James-tutorial)
 
@@ -118,9 +132,13 @@ On the [CNN Transfer Learning Tutorial](James-tutorial)
 - [Google Colab](https://example.com)
 - [Object Detection](https://hortonworks.com)
 - [TensorFlow on YARN](https://hortonworks.com/blog/distributed-tensorflow-assembly-hadoop-yarn/)
-- [TensorFlow Documentation](tf.com)
-- [TensorFlow Hub Documentation](tfhub.com)
+- [TensorFlow Documentation](https://www.tensorflow.org/api_docs/)
+- [TensorFlow Hub Documentation](https://www.tensorflow.org/hub/api_docs/python/hub)
 
 ### Appendix A: Detect objects with your own dataset
 
-In order to use the object detection model on your own images use the existing python script and 
+Once you have the python script on your {SB} running inference on your own images is fairly simple. 
+
+~~~bash
+python3 objectDetectionLocal.py --idir {path_to_input_directory} --odir {path_to_output_directory} --type {image_type (e.g. jpg, png, jpeg)}
+~~~
