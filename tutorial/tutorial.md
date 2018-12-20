@@ -17,8 +17,6 @@ series: XX > XX
 
 ## Introduction
 
-Convolutional Neural Networks (CNNs) are [insert knowledge here]() and are used for [Drop Knowledge here]().
-
 ![buggy](assets/buggy.jpg)
 
 During the 2018 [DataWorks summit](Link) Hortonworks showcased an autonomous car which was trained to follow markers along a race track. The point of the exercise is to showcase the power of a TensorFlow container managed by YARN along with GPU isolation for fast deployment of Deep Learning models.
