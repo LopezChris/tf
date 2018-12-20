@@ -44,9 +44,11 @@ In this tutorial We will employ [FasterRCNN+InceptionResNetV2](https://tfhub.dev
 To the human brain this is an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal it is we are observing. By the same token the inception_resnet_v2 has been trained on 
 Similarly in this tutorial we will explore how a computer envisions the world around it, or at least on what it has been trained to look for.
 
+note that this tutorial is modified from [Google Colab Object Detection.](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb)
+
 ## Environment Setup
 
-Ensure that the environment you are using has virtualenv with:
+Ensure that the environment you are using has:
 
 - **python3**
 - **numpy**
@@ -55,34 +57,6 @@ Ensure that the environment you are using has virtualenv with:
 - **tensorflow**
 
 Have dependencies installed in a virtual environment
-
-~~~bash
-pip3 install virtualenv
-~~~
-
-Make and activate your environment
-
-~~~bash
-mkdir ~/venv
-virtualenv ~/venv
-~~~
-
-Source and activate
-
-~~~bash
-source ~/venv/bin/activate
-~~~
-
-> NOTE: You will need python 3.6 to use this tutorial
-
-~~~bash
-apt-get install python3
-~~~
-
-~~~bash
-pip3 install numpy
-pip3 install tensorflow-hub
-~~~
 
 ### Import The Data set
 
@@ -98,7 +72,9 @@ wget github.com/raw-pythoncode
 unzip objectDetection.zip
 ~~~
 
-note that this tutorial is modified from [Google Colab Object Detection.](https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/object_detection.ipynb)
+~~~bash
+cd object-detection
+~~~
 
 Here are some of the images we've just downloaded:
 
