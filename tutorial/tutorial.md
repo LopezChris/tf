@@ -43,7 +43,7 @@ In this tutorial We will briefly explore how Deep Learning plays a role in auton
 
 ### CNN Inference
 
-In AI terms _Inference_ refers to the ability of a Neural Network to classify objects based on previously presented data. [Convolutional Neural Networks (CNNs)](https://en.wikipedia.org/wiki/Convolutional_neural_network) are a special type of network that is most efficient when working with image type data. To run inference with a CCN is to classify an image or an object within an image by using previously viewed data.
+In AI terms _Inference_ refers to the ability of a Neural Network to classify objects based on previously presented data. [Convolutional Neural Networks (CNNs)](https://en.wikipedia.org/wiki/Convolutional_neural_network) are a special type of network that is most efficient when working with image type data. To run inference with a CCN is to classify an image or an object within an image by using previously viewed data
 
 ![elephant](assets/elephant.jpg)
 
@@ -111,13 +111,23 @@ python3 objectDetectionLocal.py --idir ./images/ --odir ./output/ --type jpg
 
 ## Results
 
+The first image is of a man on the sidewalk of a busy street, as we can see the lighting condition is good and the focus is sharp on the subject of the picture, these conditions allow the model to infer on the objects in the picture with relative precision.
+
 ![man-waling-output](assets/man-waling-output.jpg)
+
+This
 
 ![good-lighting-traffic-output](assets/good-lighting-traffic-output.jpg)
 
+Is
+
 ![good-lighting-traffic-output](assets/good-lighting-traffic2-output.jpg)
 
+Sparta
+
 ![bad-condition-output](assets/bad-condition-output.jpg)
+
+HelloWorld
 
 ![bad-condition-output](assets/bad-condition2-output.jpg)
 
@@ -137,7 +147,9 @@ On the [CNN Transfer Learning Tutorial](James-tutorial)
 
 ### Appendix A: Detect objects with your own dataset
 
-Once you have the python script on your {SB} running inference on your own images is fairly simple. 
+Because the model has been pretrained on 600 categories it can be really fun to take images of your own and observe the output, and once you have the python script on your {SB} running inference on your own images is fairly simple.
+
+Simply change the parameters in the python script in the `object-detection` folder we unzipped earlier:
 
 ~~~bash
 python3 objectDetectionLocal.py --idir {path_to_input_directory} --odir {path_to_output_directory} --type {image_type (e.g. jpg, png, jpeg)}
