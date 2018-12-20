@@ -151,20 +151,21 @@ def run_inference_locally(localDir, im_type, saveDir):
 def main(argv):
   inputfile = ''
   output_file = ''
+  helpMessage = """
+  <python >= 3.6> objectDetctionLocal.py --idir <input_directory> --odir <output_directory> --type <image_type>
+  --idir specifies input directory and must be absolute path
+  --odir specifies output directory and must be absolute path
+  --type is for image type (e.g. jpg, jpeg, png)
+  """
+  
   try:
     opts, args = getopt.getopt(argv, "hi:o:t",{"idir=","odir=","type="})
   except getopt.GetoptError:
-    print('<python >= 3.6> objectDetctionLocal.py --idir <input_directory> --odir <output_directory> --type <image_type>')
-    print('--idir specifies input directory and must be absolute path')
-    print('--odir specifies output directory and must be absolute path')
-    print('--type is for image type (e.g. jpg, jpeg, png)')
+    print(helpMessage)
     sys.exit(2)
   for opt, arg in opts:
     if opt == '--help':
-      print('<python >= 3.6> objectDetctionLocal.py --idir <input_directory> --odir <output_directory> --type <image_type>')
-      print('--idir specifies input directory and must be absolute path')
-      print('--odir specifies output directory and must be absolute path')
-      print('--type is for image type (e.g. jpg, jpeg, png)')
+      print(helpMessage)
       sys.exit(2)
     elif opt in ("-i", "--idir"):
       localDir = arg
