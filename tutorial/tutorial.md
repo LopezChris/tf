@@ -132,7 +132,7 @@ Is
 
 ![good-lighting-traffic-output](assets/good-lighting-traffic2-output.jpg)
 
-The next image represents non-ideal conditions where the objects in the picture are
+The next image represents non-ideal conditions where the objects in the picture are 
 
 ![bad-condition-output](assets/bad-condition-output.jpg)
 
@@ -146,7 +146,7 @@ Congratulations, now you know how to run inference using a pre-trained model. Na
 
 ## Further Reading
 
-- [Google Colab](https://example.com)
+- [Google Colab](https://colab.research.google.com/notebooks/welcome.ipynb)
 - [Object Detection](https://hortonworks.com)
 - [TensorFlow on YARN](https://hortonworks.com/blog/distributed-tensorflow-assembly-hadoop-yarn/)
 - [TensorFlow Documentation](https://www.tensorflow.org/api_docs/)
