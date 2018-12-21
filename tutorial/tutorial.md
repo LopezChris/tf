@@ -21,15 +21,13 @@ series: XX > XX
 
 During the 2018 [DataWorks summit](Link) Hortonworks showcased an autonomous car which was trained to follow markers along a race track only by using images as a reference.
 
- The point of the exercise is to showcase the power of a TensorFlow container managed by YARN along with GPU isolation for fast deployment of Deep Learning models.
+The point of the exercise is to showcase the power of a TensorFlow container managed by YARN along with GPU isolation for fast deployment of Deep Learning models.
 
 On the clip below we can observe the perspective of the Hortonworks car.
 
 ![car-vision](assets/car-vision.gif)
 
-In this tutorial we will briefly explore Deep Learning plays a role in autonomous vehicles by using a pre-trained model to identify objects in a given image. We will employ [FasterRCNN+InceptionResNetV2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) network trained on [Open Images V4](https://storage.googleapis.com/openimages/web/index.html) imported to the environment using TensorFlow Hub.
-
-Originally the [InceptionResNetV2](https://www.tensorflow.org/versions/r1.6/api_docs/python/tf/keras/applications/InceptionResNetV2) feature extractor was trained on [ImageNet](http://www.image-net.org/) and combined with [FasterRCNN](https://arxiv.org/abs/1506.01497) on [OpenImages V4 dataset](https://storage.googleapis.com/openimages/web/index.html)
+In this tutorial we will briefly explore Deep Learning plays a role in autonomous vehicles by using a pre-trained model to identify objects in a given image. We will employ [FasterRCNN+InceptionResNetV2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) network trained on [Open Images V4](https://storage.googleapis.com/openimages/web/index.html) imported to the environment using TensorFlow Hub. Originally the [InceptionResNetV2](https://www.tensorflow.org/versions/r1.6/api_docs/python/tf/keras/applications/InceptionResNetV2) feature extractor was trained on [ImageNet](http://www.image-net.org/) and combined with [FasterRCNN](https://arxiv.org/abs/1506.01497) on [OpenImages V4 dataset](https://storage.googleapis.com/openimages/web/index.html)
 
 ## Prerequisites
 
@@ -53,7 +51,7 @@ In AI terms _Inference_ refers to the ability of a Neural Network to classify ob
 
 ![elephant](assets/elephant.jpg)
 
-To the human brain this is an image of an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal we are observing. By the same token the inception_resnet_v2 has been trained on 600 categories which enable it to recognize objects such as vehicles, humans, and even footwear.
+To the human brain this is an image of an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal we are observing. By the same token the inception_resnet_v2 has been trained on 600 categories which enable it to recognize objects such as vehicles, humans, elephants, and even footwear. The inferences we run in this tutorial are generalized; however, it will show you 
 
 We will run CNN inferences to the images below and explore how difference lighting and weather conditions can affect the results of the inference.
 
@@ -131,7 +129,7 @@ Is
 
 ![good-lighting-traffic-output](assets/good-lighting-traffic2-output.jpg)
 
-The next image represents non-ideal conditions where the objects in the picture are 
+The next image represents non-ideal conditions where the objects in the picture are
 
 ![bad-condition-output](assets/bad-condition-output.jpg)
 
@@ -141,9 +139,7 @@ The last image in the set is of
 
 ## Summary
 
-Congratulations, now you know how to run inference
-
-On the [CNN Transfer Learning Tutorial](James-tutorial)
+Congratulations, now you know how to run inference using a pre-trained model. Naturally, you might want to detect custom objects using your own data, on the [CNN Transfer Learning Tutorial](James-tutorial) you will learn to do just that by first training a model to identify elephants.
 
 ## Further Reading
 
