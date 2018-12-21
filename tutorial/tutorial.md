@@ -118,6 +118,21 @@ next execute the python script on the folder you've just downloaded
 python3 objectDetectionLocal.py --idir ~/Downloads/object-detection/images/ --odir ~/Downloads/object-detection/output/ --type jpg
 ~~~
 
+While the model is running inference on the sample images you should see an output like this:
+
+~~~python
+bad-condition.jpg
+Found 100 objects.
+man-walking.jpg
+Found 100 objects.
+bad-condition2.jpg
+Found 0 objects.
+good-lighting-traffic2.jpg
+Found 10 objects.
+good-lighting-traffic.jpg
+Found 100 objects.
+~~~
+
 ## Results
 
 The first image is of a man on the sidewalk of a busy street, as we can see the lighting condition is good and the focus is sharp on the subject, these conditions allow the model to infer on the objects in the picture with relatively high precision.
