@@ -21,13 +21,15 @@ series: XX > XX
 
 During the 2018 [DataWorks summit](https://dataworkssummit.com/) Hortonworks showcased a miniature autonomous car which was trained to follow markers along a race track, the team achieved this by rapidly sampling photographs and using them to run inference to adjust the steering angle of the vehicle.
 
-The point of the exercise is to showcase the power of a [TensorFlow container managed by YARN](https://www.youtube.com/watch?v=naLTAsy0tx8) along with GPU polling for fast deployment to the [Jetson TX2](https://developer.nvidia.com/embedded/buy/jetson-tx2) module aboard the car.
+The point of the exercise is to showcase the power of a [TensorFlow container managed by YARN](https://www.youtube.com/watch?v=naLTAsy0tx8) along with GPU polling for fast deployment to the [Jetson TX2](https://developer.nvidia.com/embedded/buy/jetson-tx2) module aboard the miniature car. The model deployed was then used to gather more data which helped refine the model even further.
+
+
 
 The clip below is an example of a classification model deployed on images collected by the Hortonworks miniature race car to recognize common objects around the Santa Clara, CA Hortonworks Headquarters. In fact, this is the same model that you will use in this tutorial to classify common objects.
 
 ![car-vision](assets/car-vision.gif)
 
-In this tutorial we will explore the role that CNNs play in autonomous vehicles by using a pre-trained model to identify objects in a given image; furthermore, we will test the limit of the model by changing the lighting and weather conditions of the input image to showcase how Deep Learning models are best when used with plenty of data it has seen before, and if we want our model to be flexible we must gather as much data as possible from every variable.
+In this tutorial we will explore the role that CNNs play in autonomous vehicles by using a pre-trained model to identify objects in a given image; furthermore, we will test the limit of the model--which was trained on ideal weather conditions--by changing the lighting and weather conditions of the input image to showcase how Deep Learning models are best when used with plenty of data it has seen before. If we want our model to be flexible we must gather as much data as possible from all driving conditions. 
 
 To achieve this we will employ [FasterRCNN+InceptionResNetV2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) network trained on [Open Images V4](https://storage.googleapis.com/openimages/web/index.html) imported to the environment using TensorFlow Hub. Originally the [InceptionResNetV2](https://www.tensorflow.org/versions/r1.6/api_docs/python/tf/keras/applications/InceptionResNetV2) feature extractor was trained on [ImageNet](http://www.image-net.org/) and combined with [FasterRCNN](https://arxiv.org/abs/1506.01497) on [OpenImages V4 dataset](https://storage.googleapis.com/openimages/web/index.html).
 
@@ -60,7 +62,13 @@ In AI terms _Inference_ refers to the ability of a model to classify objects bas
 
 ![elephant](assets/elephant.jpg)
 
-To the human brain this is an image of an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal we are observing. By the same token the [inception_resnet_v2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) model has been trained on 600 categories (objects) which enable it to recognize things such as vehicles, humans, elephants, and even footwear.
+To the human brain this is an image of an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal we are observing. By the same token the [inception_resnet_v2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) model has been trained on 600 categories (objects) which enable it to recognize things such as vehicles, humans, elephants, and even footwear based on previously seen image type data. The percentage displaced at the right of the object label is the percentage confidence that the prediction is correct.
+
+### Role of Big Data in Deep Learning
+
+It is clear then that we must accrue as much data as possible, but with large scale data come many issues such as distributing  
+
+![bigdata.jpg](assets/bigdata.jpg)
 
 ## Environment Setup
 
@@ -154,6 +162,8 @@ The next image represents non-ideal conditions where the objects in the picture 
 The last image in the set is of 
 
 ![bad-condition-output](assets/bad-condition2-output.jpg)
+
+
 
 ## Summary
 
