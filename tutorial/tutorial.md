@@ -50,6 +50,7 @@ We will run CNN inferences to the images below and explore how difference lighti
 - [Environment Setup](#environment-setup)
 - [Import the Data Set](#import-the-data-set)
 - [Run The Object Detection Model](#run-the-object-detection-model)
+- [Role of Big Data](#role-of-big-data)
 - [Summary](#summary)
 - [Further Reading](#further-reading)
 - [Appendix A: Troubleshoot](#appendix-a-troubleshoot)
@@ -63,12 +64,6 @@ In AI terms _Inference_ refers to the ability of a model to classify objects bas
 ![elephant](assets/elephant.jpg)
 
 To the human brain this is an image of an elephant, albeit a drawing of one but an elephant nonetheless, we know this because we are able to make associations with previous shapes we have seen before and infer what type of animal we are observing. By the same token the [inception_resnet_v2](https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1) model has been trained on 600 categories (objects) which enable it to recognize things such as vehicles, humans, elephants, and even footwear based on previously seen image type data. The percentage displaced at the right of the object label is the percentage confidence that the prediction is correct.
-
-### Role of Big Data in Deep Learning
-
-It is clear then that we must accrue as much data as possible, but with large scale data come many issues such as distributing  
-
-![bigdata.jpg](assets/bigdata.jpg)
 
 ## Environment Setup
 
@@ -147,27 +142,41 @@ The first image is of a man on the sidewalk of a busy street, as we can see the 
 
 ![man-waling-output](assets/man-waling-output.jpg)
 
-The next image depicts a typical 
+The next two images show normal traffic conditions and good lighting, here we can infer most vehicles on the road and use that information to help make a decision for the car's next move.
 
 ![good-lighting-traffic-output](assets/good-lighting-traffic-output.jpg)
 
-Is
-
 ![good-lighting-traffic-output](assets/good-lighting-traffic2-output.jpg)
 
-The next image represents non-ideal conditions where the objects in the picture are 
+The next image represents non-ideal conditions where the objects in the picture are blocked by water droplets; further, the lighting conditions are non-ideal. Our model does not bode well here as it has not been trained under bad weather and poor lighting, this image highlights the importance of including all 
 
 ![bad-condition-output](assets/bad-condition-output.jpg)
 
-The last image in the set is of 
+The last image in the set shows that our model was not able to identify any objects. To a human brain it might be clear that there are vehicles in the image despite it being a blurry image, which is a possible scenario with a dirty camera lense or fog. However, we can only infer this because we have previously seen blurry images and deduce that the object in the image is in-fact a vehicle. If we wish our model to be able to identify vehicles in bad weather and poor lighting conditions we must also use this type of data for training.
 
 ![bad-condition-output](assets/bad-condition2-output.jpg)
 
+## Role of Big Data
 
+It is clear then that we must accrue as much data as possible for useful models. There are many factors that we must bear in mind when collecting great deals of data chief 
+
+- **Data Volume and Variety:**
+
+With hundreds or thousands of sensors on autonomous vehicles our data collection methods and storage must be as flexible as possible. From the images shown earlier it is clear that even if we have a very good model trained to recognize images we cannot solely rely on it, we must incorporate other types of sensors such as Lidars
+
+- **Data Movement:**
+
+Global industries must ensure that the data collected is secure, adheres to standarized policies, and is easily accesible for those with appropriate clearance. Hadoop provides an elegant solution that allows for data-type and storage flexibility along with governance and lineage.
+
+- **In place Processing:**
+
+
+
+![bigdata.jpg](assets/bigdata.jpg)
 
 ## Summary
 
-Congratulations, now you know how to run inference using a pre-trained model. Naturally, you might want to detect custom objects using your own data, on the [CNN Transfer Learning Tutorial](James-tutorial) you will learn to do just that by first training a model to identify elephants.
+Congratulations, now you know how to run inference using a pre-trained model. Naturally, you might want to detect custom objects using your own data, on the [CNN Transfer Learning Tutorial](James-tutorial) you will learn to do just that by first training a model to identify custom objects.
 
 ## Further Reading
 
