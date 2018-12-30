@@ -23,8 +23,6 @@ During the 2018 [DataWorks summit](https://dataworkssummit.com/) Hortonworks sho
 
 The point of the exercise is to showcase the power of a [TensorFlow container managed by YARN](https://www.youtube.com/watch?v=naLTAsy0tx8) along with GPU polling for fast deployment to the [Jetson TX2](https://developer.nvidia.com/embedded/buy/jetson-tx2) module aboard the miniature car. The model deployed was then used to gather more data which helped refine the model even further.
 
-
-
 The clip below is an example of a classification model deployed on images collected by the Hortonworks miniature race car to recognize common objects around the Santa Clara, CA Hortonworks Headquarters. In fact, this is the same model that you will use in this tutorial to classify common objects.
 
 ![car-vision](assets/car-vision.gif)
@@ -148,7 +146,7 @@ The next two images show normal traffic conditions and good lighting, here we ca
 
 ![good-lighting-traffic-output](assets/good-lighting-traffic2-output.jpg)
 
-The next image represents non-ideal conditions where the objects in the picture are blocked by water droplets; further, the lighting conditions are non-ideal. Our model does not bode well here as it has not been trained under bad weather and poor lighting, this image highlights the importance of including all 
+The next image represents non-ideal conditions where the objects in the picture are blocked by water droplets; further, the lighting conditions are non-ideal. Our model does not bode well here as it has not been trained under bad weather and poor lighting, this image highlights the importance of including all
 
 ![bad-condition-output](assets/bad-condition-output.jpg)
 
@@ -158,7 +156,7 @@ The last image in the set shows that our model was not able to identify any obje
 
 ## Role of Big Data
 
-It is clear then that we must accrue as much data as possible for useful models. There are many factors that we must bear in mind when collecting great deals of data chief 
+It is clear then that we must accrue as much data as possible for useful models. There are many factors that we must bear in mind when collecting great deals chief amongst them are:
 
 - **Data Volume and Variety:**
 
@@ -166,11 +164,11 @@ With hundreds or thousands of sensors on autonomous vehicles our data collection
 
 - **Data Movement:**
 
-Global industries must ensure that the data collected is secure, adheres to standarized policies, and is easily accesible for those with appropriate clearance. Hadoop provides an elegant solution that allows for data-type and storage flexibility along with governance and lineage.
+Global industries must ensure that the data collected is secure, adheres to standardized policies, and is easily accesible for those with appropriate clearance. Hadoop provides an elegant solution that allows for data-type and storage flexibility along with governance and lineage.
 
-- **In place Processing:**
+- **In place Processing**
 
-
+Hadoop data lakes with GPUs introduces the ability to consolidate Petabytes of data with computing power to create models in a single platform.
 
 ![bigdata.jpg](assets/bigdata.jpg)
 
